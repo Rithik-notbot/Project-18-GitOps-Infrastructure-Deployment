@@ -1,17 +1,12 @@
-resource "aws_s3_bucket" "gitops" {
-  bucket = "project-18-gitops-infrastructure-2026"
-
-  tags = {
-    Name      = "Project-18-GitOps"
-    Project   = "Project-18"
-    ManagedBy = "Terraform"
-  }
+terraform {
+  required_version = ">= 1.5.0"
 }
 
-resource "aws_s3_bucket_versioning" "gitops" {
-  bucket = aws_s3_bucket.gitops.id
-
-  versioning_configuration {
-    status = "Enabled"
+resource "terraform_data" "gitops_demo" {
+  input = {
+    project  = "Project-18"
+    workflow = "GitOps"
+    platform = "GitHub Actions"
+    status   = "validated"
   }
 }
